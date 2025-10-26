@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Приглашение на романтический вечер в кино 🎬💖</title>
+    <style>
+        :root {
+            --bg: #1b0a14;
+            --card: #2c1320;
+            --accent: #ff6b9d;
+            --accent2: #ffd1dc;
+            --text: #ffeef5;
+            --muted: #d6b3c5;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Poppins", "Inter", sans-serif;
+            background: radial-gradient(circle at top left, rgba(255,107,157,0.12), transparent),
+            radial-gradient(circle at bottom right, rgba(255,209,220,0.08), transparent),
+            var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 920px;
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 24px;
+            align-items: start;
+            animation: fadeIn 1s ease;
+        }
+
+        .card {
+            background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+            border: 1px solid rgba(255,255,255,0.06);
+            padding: 24px;
+            border-radius: 18px;
+            box-shadow: 0 8px 30px rgba(255,107,157,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .poster {
+            height: 420px;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: end;
+            background: linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.7)),
+            url("https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?auto=format&fit=crop&w=800&q=80") center/cover no-repeat;
+            animation: fadeInUp 1s ease;
+        }
+
+        .poster .info {
+            padding: 18px;
+            width: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .movie-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--accent2);
+            text-shadow: 0 0 8px rgba(255,209,220,0.4);
+        }
+
+        .meta {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .play {
+            background: var(--accent);
+            border: none;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(255,107,157,0.3);
+            color: #fff;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .play:hover { transform: scale(1.05); box-shadow: 0 0 16px rgba(255,107,157,0.4); }
+
+        .btn {
+            background: linear-gradient(90deg, var(--accent), #ffa6c4);
+            padding: 12px 18px;
+            border-radius: 10px;
+            border: none;
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(255,107,157,0.25);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn:hover { transform: scale(1.05); box-shadow: 0 0 18px rgba(255,107,157,0.4); }
+
+        .secondary {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--muted);
+            padding: 12px 18px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        input, select, textarea {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 10px 12px;
+            border-radius: 8px;
+            color: inherit;
+            width: 100%;
+            font-family: inherit;
+        }
+
+        label { font-weight: 600; margin-top: 6px; display: block; }
+
+        footer {
+            font-size: 13px;
+            color: var(--muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+
+        .heart {
+            color: var(--accent);
+            animation: pulse 1.8s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(27,10,20,0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .modal {
+            background: var(--card);
+            border-radius: 14px;
+            padding: 20px;
+            width: 100%;
+            max-width: 700px;
+            animation: fadeIn 0.4s ease;
+            box-shadow: 0 0 20px rgba(255,107,157,0.3);
+        }
+
+        /* Мобильная адаптация */
+        @media (max-width: 768px) {
+            .container { grid-template-columns: 1fr; gap: 16px; }
+            .poster { height: 260px; }
+            .movie-title { font-size: 22px; }
+            .btn, .secondary { width: 100%; }
+            footer { flex-direction: column; align-items: flex-start; gap: 6px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <div class="poster">
+            <div class="info">
+                <div>
+                    <div class="movie-title">"Вечер для нас двоих"</div>
+                    <div class="meta">Романтика · 2ч · 12+</div>
+                </div>
+                <button class="play" id="openTrailer">► Трейлер</button>
+            </div>
+        </div>
+        <section style="margin-top:16px">
+            <h3>💌 Приглашение</h3>
+            <p class="meta">Хочу пригласить тебя провести этот вечер вместе — под звёздами, в уютном кинозале.
+                Пусть это будет наш маленький романтичный фильм, где главные герои — мы 💖</p>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                <button class="btn" id="rsvpOpen">Подтвердить ❤️</button>
+                <button class="secondary" id="shareBtn">Поделиться</button>
+            </div>
+        </section>
+        <footer>
+            <div>С любовью <span class="heart">♥</span></div>
+            <div class="meta">До встречи в кино</div>
+        </footer>
+    </div>
+
+    <aside class="card">
+        <div>
+            <div class="meta">Когда и где</div>
+            <div style="font-size:20px; font-weight:700;">Пятница, 14 ноября · 19:30</div>
+            <div class="meta">Кинотеатр «Ночь» · зал 3</div>
+        </div>
+
+        <div style="margin-top:12px">
+            <label>Имя</label>
+            <input id="name" placeholder="Твоё имя" />
+            <label>Сколько вас?</label>
+            <select id="count">
+                <option>1</option><option>2</option>
+            </select>
+            <label>Сообщение</label>
+            <textarea id="notes" rows="3" placeholder="С нетерпением жду 💕"></textarea>
+            <button class="btn" id="rsvpBtn">Отправить</button>
+        </div>
+
+        <div style="margin-top:12px">
+            <div style="font-weight:700">Статус</div>
+            <div id="status" class="meta">Пока нет ответа</div>
+        </div>
+    </aside>
+</div>
+
+<!-- Модальное окно -->
+<div class="modal-backdrop" id="modal">
+    <div class="modal">
+        <h3>🎥 Трейлер к нашему вечеру</h3>
+        <div style="aspect-ratio:16/9; background:#111; display:flex;align-items:center;justify-content:center;border-radius:8px;color:var(--muted);margin-top:10px">
+            Видео скоро будет... ❤️
+        </div>
+        <button class="btn" id="okModal" style="margin-top:10px">Закрыть</button>
+    </div>
+</div>
+
+<script>
+    const rsvpBtn = document.getElementById('rsvpBtn');
+    const status = document.getElementById('status');
+    rsvpBtn.addEventListener('click', () => {
+        const name = document.getElementById('name').value.trim();
+        const count = document.getElementById('count').value;
+        if (!name) return alert('Пожалуйста, введи имя 💕');
+        localStorage.setItem('rsvp', JSON.stringify({ name, count }));
+        status.textContent = `Подтверждено: ${name} (${count}) 💖`;
+        status.style.color = 'lightpink';
+        alert('Спасибо, твоё подтверждение получено 💌');
+    });
+
+    const openTrailer = document.getElementById('openTrailer');
+    const modal = document.getElementById('modal');
+    const okModal = document.getElementById('okModal');
+    openTrailer.addEventListener('click', () => { modal.style.display = 'flex'; });
+    okModal.addEventListener('click', () => { modal.style.display = 'none'; });
+    modal.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
+
+    const shareBtn = document.getElementById('shareBtn');
+    shareBtn.addEventListener('click', async () => {
+        const text = '💖 Приглашаю тебя на романтический вечер в кино 🎬✨';
+        try {
+            if (navigator.share) {
+                await navigator.share({ title: 'Приглашение в кино', text });
+            } else {
+                await navigator.clipboard.writeText(text);
+                alert('Текст приглашения скопирован 💞');
+            }
+        } catch (e) {
+            alert('Не удалось поделиться 😔');
+        }
+    });
+
+    const rsvpOpen = document.getElementById('rsvpOpen');
+    rsvpOpen.addEventListener('click', () => {
+        document.getElementById('name').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+</script>
+</body>
+</html>
